@@ -1,0 +1,108 @@
+/* Booking.css */
+
+/* -------------- Page Setup -------------- */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f0f2f5; /* subtle gray-blue background */
+  font-family: Arial, sans-serif;
+}
+
+/* -------------- Header for Login/Signup -------------- */
+.header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.auth-buttons button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  background-color: #005eff;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.auth-buttons button:hover {
+  background-color: #0047c0;
+}
+
+/* -------------- Centered Wrapper -------------- */
+.page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* fills screen below header */
+  padding: 20px;
+}
+
+/* -------------- Booking Card -------------- */
+.booking-container {
+  color: black;
+  width: 100%;
+  max-width: 700px;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* -------------- Heading -------------- */
+.booking-container h2 {
+  margin-bottom: 24px;
+  color: #222;
+  font-size: 28px;
+}
+
+/* -------------- Form Styling -------------- */
+.booking-form label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #333;
+  text-align: left;
+}
+
+.booking-form input,
+.booking-form select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: black;
+  transition: border-color 0.3s;
+}
+
+.booking-form input:focus,
+.booking-form select:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+/* -------------- Submit Button -------------- */
+.booking-button {
+  margin-top: 24px;
+  width: 100%;
+  padding: 14px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.booking-button:hover {
+  background-color: #218838;
+}
