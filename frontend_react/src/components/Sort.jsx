@@ -14,7 +14,7 @@ const Sort = ({isOpen , onClose , setSortTime , setSortprice}) => {
     return (
         <div>
             <button className = "departureTime" onClick = {() => {Sorting(true)}}>Departure Time</button>
-            <button className = "Price" onClick = {() => {Sorting(false)}} >Pirce</button>
+            <button className = "Price" onClick = {() => {Sorting(false)}} >Price</button>
         </div>
 
     );

@@ -16,6 +16,9 @@ public class Seats {
 
     @Column(name = "seats_booked")
     private int totalSeats;
+
+    @Column(name = "seats")
+    private String seats;
     
     public Seats() {
     // Required by JPA
@@ -41,6 +44,9 @@ public class Seats {
 
         
     }
+    public void setSeatsPosition(String seats){
+        this.seats = seats;
+    }
     public String getFlightNumber(){
         return flightNumber;
 
@@ -55,6 +61,10 @@ public class Seats {
         return totalSeats;
 
         
+    }
+    public String getSeatPosition(){
+        return seats;
+
     }
     
 

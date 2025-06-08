@@ -2,11 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 import "./Booking.css";
 import { useLocation } from "react-router-dom";
+import SelectSeats from "../components/SelectSeats";
 
 const BookingPage = () => {
   const { state } = useLocation();
   const { flight, form } = state;
-
+  const [openSeats , setOpenSeats] = useState(false);
   const [booking, setBooking] = useState({
     name_: "",  // Frontend state uses name_
     gender: "",
@@ -22,7 +23,8 @@ const BookingPage = () => {
   const handleChange = (e) => {
     setBooking({ ...booking, [e.target.name]: e.target.value });
   };
-
+  const savedSeats = localStorage.getItem('selectedSeats') || "";
+  
   const handleSubmit = async () => {
     try {
       // Map booking object to send correct key to backend
@@ -42,6 +44,14 @@ const BookingPage = () => {
       console.error("Booking failed", err);
       alert("Booking failed.");
     }
+    const seatOfFlight = {
+      flightNumber : flight.flightNumber , 
+      date : form.date , 
+      passengers : form.passengers ,
+      seats : savedSeats
+
+    };
+    const saveseats = await axios.post("http://localhost:8080/seatsOfFlight" , seatOfFlight);
   };
 
   return (
@@ -114,6 +124,9 @@ const BookingPage = () => {
             onChange={handleChange}
           />
         </label>
+        <button onClick = {() => setOpenSeats(true)} > Select Seats</button>
+        <SelectSeats passengers = {form.passengers} isOpen = {openSeats} onClose = {() => setOpenSeats(false)}></SelectSeats>
+        <div>Selected Seats : {savedSeats}</div>
 
         <button onClick={handleSubmit}>Confirm Booking</button>
       </div>

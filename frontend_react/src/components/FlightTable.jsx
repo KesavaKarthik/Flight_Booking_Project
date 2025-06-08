@@ -1,6 +1,7 @@
 //import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './FlightTable.css';
+import axios from 'axios';
 
 const FlightTable  = ({isOpen , flights ,sort , form}) => {
     if(!isOpen) return null;
@@ -26,8 +27,17 @@ const FlightTable  = ({isOpen , flights ,sort , form}) => {
 
     }
     const navigate = useNavigate();
-    const handleBooking = (flight) => {
+    const handleBooking = async (flight) => {
+      const flightdetails = {
+        flightNumber : flight.flightNumber ,
+        travleDate : form.date 
+
+      }
+      const response = await axios.post('http://localhost:8080/SeatsPosition',flightdetails);
+      console.log("recieved seat data ",response.data);
+      localStorage.setItem( 'bookedSeats' , response.data);
       navigate( '/BookingPage' ,{ state : {flight , form} });
+
     }
     return (
         <div className="results">

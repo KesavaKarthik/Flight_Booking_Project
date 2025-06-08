@@ -60,33 +60,56 @@ public class FlightController {
     
     return final_flights;
     }
-
+    @PostMapping("/SeatsPosition")
+    public String seatsPosition(@RequestBody Map<String , String> flight){
+        String flightNumber = flight.get("flightNumber");
+        String travelDate = flight.get("travleDate");
+        Seats temp = seatsRepository.findByFlightNumberAndTravelDate(flightNumber , travelDate);
+        if( temp != null){
+            return temp.getSeatPosition();
+        }
+        else return "";
+    }
     // ✅ Create booking
     
     @PostMapping("/booking")
     public void createBooking(@RequestBody Booking booking) {
         System.out.println("hi");
         bookingRepository.save(booking);
-        Seats flightSeats = seatsRepository.findByFlightNumberAndTravelDate(booking.getFlightNumber(), booking.getTravelDate());
-        if(flightSeats == null){
+        
+
+
+    }
+    @PostMapping("/seatsOfFlight")
+    public void removeSeats(@RequestBody Map<String , String> seatPositions){
+        String flightNumber = seatPositions.get("flightNumber");
+        String date = seatPositions.get("date");
+        String passengersStr = seatPositions.get("passengers");
+        String selectedSeats = seatPositions.get("seats");
+        System.out.println(selectedSeats + "hi");
+        System.out.println(flightNumber + "hi");
+        int passengers = Integer.parseInt(passengersStr);
+        System.out.println("passengers = " +  passengers);
+        Seats response = seatsRepository.findByFlightNumberAndTravelDate(flightNumber, date);
+        if( response == null){
             Seats flightseats = new Seats();
-            flightseats.setseats(booking.getNoOfSeats());
-            flightseats.setFlightNumber(booking.getFlightNumber());
-            flightseats.setTravelDate(booking.getTravelDate());
+            flightseats.setseats(passengers);
+            flightseats.setFlightNumber(flightNumber);
+            flightseats.setTravelDate(date);
+            flightseats.setSeatsPosition(selectedSeats);
 
 
 
             
             seatsRepository.save(flightseats);
+            
         }
         else{
-            flightSeats.setseats(booking.getNoOfSeats() + flightSeats.getSeats() );
-            seatsRepository.save(flightSeats);
-
+            response.setSeatsPosition(selectedSeats);
+            response.setseats( response.getSeats() + passengers);
+            seatsRepository.save(response);
 
         }
-    
-
 
     }
 
